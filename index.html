@@ -1,0 +1,2634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mekronix - Innovation in Action</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <style>
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background-color: #020818;
+      color: #e0e6ff;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    p, a, li, span {
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .neon-accent {
+      text-shadow: 0 0 10px rgba(71, 131, 255, 0.8), 0 0 20px rgba(0, 89, 255, 0.6);
+    }
+    
+    .neon-button {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 5px rgba(0, 89, 255, 0.5);
+    }
+    
+    .neon-button:hover {
+      box-shadow: 0 0 15px rgba(0, 89, 255, 0.8), 0 0 25px rgba(0, 89, 255, 0.6);
+    }
+    
+    .neon-button::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: rgba(0, 89, 255, 0.2);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .neon-button:hover::before {
+      opacity: 1;
+    }
+    
+    .service-card {
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 89, 255, 0.1);
+      background: linear-gradient(135deg, rgba(13, 23, 42, 0.8) 0%, rgba(2, 8, 24, 0.9) 100%);
+      backdrop-filter: blur(10px);
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 89, 255, 0.2);
+      border: 1px solid rgba(0, 89, 255, 0.3);
+    }
+    
+    .team-card {
+      transition: all 0.3s ease;
+    }
+    
+    .team-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .animated-gradient {
+      background: linear-gradient(270deg, #010b19, #020818);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+    }
+    
+    @keyframes gradient {
+      0% { background-position: 0% 50% }
+      50% { background-position: 100% 50% }
+      100% { background-position: 0% 50% }
+    }
+    
+    .glossary-term {
+      color: #4783ff;
+      cursor: help;
+      border-bottom: 1px dotted #4783ff;
+    }
+    
+    /* Cyberpunk grid lines */
+    .cyber-grid {
+      background-image: 
+        linear-gradient(rgba(0, 89, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 89, 255, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    
+    /* Glitch effect */
+    .glitch {
+      position: relative;
+    }
+    
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .glitch::before {
+      left: 2px;
+      text-shadow: -1px 0 #00eeff;
+      clip: rect(24px, 550px, 90px, 0);
+      animation: glitch-anim-1 2s infinite linear alternate-reverse;
+      opacity: 0.3;
+    }
+    
+    .glitch::after {
+      left: -2px;
+      text-shadow: -1px 0 #ff00ff;
+      clip: rect(85px, 550px, 140px, 0);
+      animation: glitch-anim-2 2s infinite linear alternate-reverse;
+      opacity: 0.3;
+    }
+    
+    @keyframes glitch-anim-1 {
+      0% { clip: rect(31px, 9999px, 54px, 0); }
+      20% { clip: rect(14px, 9999px, 79px, 0); }
+      40% { clip: rect(98px, 9999px, 3px, 0); }
+      60% { clip: rect(68px, 9999px, 27px, 0); }
+      80% { clip: rect(2px, 9999px, 75px, 0); }
+      100% { clip: rect(50px, 9999px, 40px, 0); }
+    }
+    
+    @keyframes glitch-anim-2 {
+      0% { clip: rect(60px, 9999px, 7px, 0); }
+      20% { clip: rect(89px, 9999px, 30px, 0); }
+      40% { clip: rect(37px, 9999px, 56px, 0); }
+      60% { clip: rect(63px, 9999px, 23px, 0); }
+      80% { clip: rect(42px, 9999px, 15px, 0); }
+      100% { clip: rect(91px, 9999px, 46px, 0); }
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #0d172a;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #0059ff;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #003cbf;
+    }
+
+    /* Stock chart container */
+    .chart-container {
+      background-color: rgba(2, 8, 24, 0.8);
+      border: 1px solid rgba(0, 89, 255, 0.2);
+      border-radius: 8px;
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Loading animation */
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    
+    .loading-pulse {
+      animation: pulse 1.5s infinite;
+    }
+
+    /* Hero section scanner effect */
+    .scanner-line {
+      position: absolute;
+      top: 0;
+      left: -100px;
+      right: -100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0, 111, 255, 0.8), transparent);
+      animation: scan 4s linear infinite;
+      z-index: 2;
+    }
+    
+    @keyframes scan {
+      0% { top: 0; }
+      100% { top: 100%; }
+    }
+    
+    /* Cyber circuit line effect */
+    .cyber-line {
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 89, 255, 0.3), transparent);
+    }
+    
+    .cyber-line-horizontal-1 {
+      top: 25%;
+      animation: pulse-line 4s infinite;
+    }
+    
+    .cyber-line-horizontal-2 {
+      top: 75%;
+      animation: pulse-line 5s infinite reverse;
+    }
+    
+    .cyber-line-vertical-1 {
+      height: 100%;
+      width: 1px;
+      left: 25%;
+      top: 0;
+      background: linear-gradient(180deg, transparent, rgba(0, 89, 255, 0.3), transparent);
+      animation: pulse-line 4.5s infinite;
+    }
+    
+    .cyber-line-vertical-2 {
+      height: 100%;
+      width: 1px;
+      left: 75%;
+      top: 0;
+      background: linear-gradient(180deg, transparent, rgba(0, 89, 255, 0.3), transparent);
+      animation: pulse-line 5.5s infinite reverse;
+    }
+    
+    @keyframes pulse-line {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.7; }
+    }
+  </style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            dark: '#020818',
+            darker: '#010b19',
+            primary: '#0059ff',
+            'primary-dark': '#003cbf',
+            secondary: '#0d172a',
+            accent: '#4783ff',
+            navy: '#0d1b42',
+            'cyber-pink': '#ff2a6d',
+            'cyber-cyan': '#05d9e8'
+          },
+          fontFamily: {
+            orbitron: ['Orbitron', 'sans-serif'],
+            rajdhani: ['Rajdhani', 'sans-serif'],
+            montserrat: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body x-data="app()" class="cyber-grid">
+  <!-- Cyber decorative lines -->
+  <div class="cyber-line cyber-line-horizontal-1"></div>
+  <div class="cyber-line cyber-line-horizontal-2"></div>
+  <div class="cyber-line cyber-line-vertical-1"></div>
+  <div class="cyber-line cyber-line-vertical-2"></div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-darker/90 backdrop-blur-md z-50 border-b border-primary/20">
+    <div class="container mx-auto px-4 md:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <a href="#" class="flex items-center space-x-2">
+          <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop" alt="Mekronix Logo" class="w-10 h-10 rounded-full border border-primary/50 object-cover">
+          <span class="text-2xl font-bold text-primary neon-accent font-orbitron">Mekronix</span>
+        </a>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-6 items-center font-rajdhani">
+          <a href="#home" class="text-white hover:text-primary transition-colors duration-300 text-lg">Home</a>
+          <a href="#services" class="text-white hover:text-primary transition-colors duration-300 text-lg">Services</a>
+          <a href="#team" class="text-white hover:text-primary transition-colors duration-300 text-lg">Team</a>
+          <a href="#tech-insights" class="text-white hover:text-primary transition-colors duration-300 text-lg">Tech Insights</a>
+          <a href="#contact" class="text-white hover:text-primary transition-colors duration-300 text-lg">Contact</a>
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden text-white">
+          <i class="bi bi-list text-2xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" class="md:hidden bg-darker/95 backdrop-blur-md border-b border-primary/20" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform -translate-y-4">
+      <div class="container mx-auto px-6 py-4 flex flex-col space-y-4 font-rajdhani">
+        <a href="#home" class="text-white hover:text-primary py-2 transition-colors duration-300" @click="mobileMenuOpen = false">Home</a>
+        <a href="#services" class="text-white hover:text-primary py-2 transition-colors duration-300" @click="mobileMenuOpen = false">Services</a>
+        <a href="#team" class="text-white hover:text-primary py-2 transition-colors duration-300" @click="mobileMenuOpen = false">Team</a>
+        <a href="#tech-insights" class="text-white hover:text-primary py-2 transition-colors duration-300" @click="mobileMenuOpen = false">Tech Insights</a>
+        <a href="#contact" class="text-white hover:text-primary py-2 transition-colors duration-300" @click="mobileMenuOpen = false">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative min-h-screen flex items-center pt-16 animated-gradient overflow-hidden">
+    <!-- Scanner effect line -->
+    <div class="scanner-line"></div>
+    
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-r from-darker/90 to-dark/70"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(0,89,255,0.1)_0%,transparent_70%)]"></div>
+      <div class="absolute right-0 bottom-0 opacity-20 md:opacity-30">
+        <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=1740&auto=format&fit=crop" alt="Robot" class="h-full max-h-[70vh] object-contain">
+      </div>
+      <!-- Decorative elements -->
+      <div class="absolute top-32 left-32 w-32 h-32 border border-primary/20 rounded-full opacity-20 animate-pulse"></div>
+      <div class="absolute bottom-40 left-1/4 w-20 h-20 border border-primary/20 rounded-full opacity-10 animate-ping" style="animation-duration: 3s;"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-8">
+          <div>
+            <span class="text-primary font-medium inline-block mb-3 border border-primary px-3 py-1 rounded-full text-sm bg-primary/10">NEXT GEN ROBOTICS</span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight font-orbitron">
+              <span data-text="Innovation" class="glitch text-primary neon-accent">Innovation</span> in <span class="text-white">Action</span>
+            </h1>
+          </div>
+          <p class="text-lg md:text-xl text-gray-300 max-w-xl font-montserrat">
+            Revolutionizing industries through cutting-edge robotics solutions. Empowering businesses with intelligent automation for a smarter future.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#services" class="px-8 py-3 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark transition-colors duration-300 neon-button font-rajdhani">
+              Explore Services
+            </a>
+            <a href="#contact" class="px-8 py-3 bg-transparent border border-primary text-primary font-semibold rounded-md hover:bg-primary/10 transition-colors duration-300 font-rajdhani">
+              Contact Us
+            </a>
+          </div>
+        </div>
+        <div class="hidden md:block relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent rounded-lg opacity-50 animate-pulse" style="animation-duration: 3s;"></div>
+          <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop" alt="Advanced Robotics" class="rounded-lg shadow-2xl w-full max-w-lg h-auto mx-auto transform hover:scale-105 transition-transform duration-500 border border-primary/20 relative z-10">
+          <!-- Decorative lines -->
+          <div class="absolute top-0 right-0 w-20 h-20">
+            <div class="absolute top-0 right-0 w-5 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-5 bg-primary"></div>
+          </div>
+          <div class="absolute bottom-0 left-0 w-20 h-20">
+            <div class="absolute bottom-0 left-0 w-5 h-1 bg-primary"></div>
+            <div class="absolute bottom-0 left-0 w-1 h-5 bg-primary"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <a href="#services" class="text-white/70 hover:text-primary transition-colors">
+        <i class="bi bi-chevron-down text-2xl"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-20 bg-darker relative">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,89,255,0.05)_0%,transparent_50%)]"></div>
+    <!-- Decorative robot background -->
+    <div class="absolute right-0 top-0 h-full w-1/4 opacity-5">
+      <img src="https://images.unsplash.com/photo-1546776310-eef45dd6d63c?q=80&w=1296&auto=format&fit=crop" alt="Robot Silhouette" class="h-full w-full object-cover object-right">
+    </div>
+    
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Our Services</h2>
+        <div class="h-1 w-24 bg-primary mx-auto mb-8 rounded-full"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Service 1 -->
+        <div class="service-card rounded-lg p-6 relative overflow-hidden">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="bg-primary/10 rounded-full w-14 h-14 flex items-center justify-center mb-6 text-primary">
+            <i class="bi bi-robot text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 font-rajdhani">Custom Robots</h3>
+          <p class="text-gray-300 mb-6 font-montserrat">Tailor-made robotic solutions designed to meet specific industry requirements and business objectives.</p>
+          <ul class="space-y-2 text-gray-400 mb-6 font-montserrat">
+            <li class="flex items-start">
+              <i class="bi bi-check-circle-fill text-primary mt-1 mr-2"></i>
+              <span>Industrial Automation</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-check-circle-fill text-primary mt-1 mr-2"></i>
+              <span>Process Optimization</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-check-circle-fill text-primary mt-1 mr-2"></i>
+              <span>Quality Control Systems</span>
+            </li>
+          </ul>
+          <a href="#" class="text-primary inline-flex items-center hover:text-accent transition-colors font-rajdhani">
+            Learn more <i class="bi bi-arrow-right ml-2"></i>
+          </a>
+        </div>
+        
+        <!-- Service 2 -->
+        <div class="service-card rounded-lg p-6 relative overflow-hidden">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="bg-primary/10 rounded-full w-14 h-14 flex items-center justify-center mb-6 text-primary">
+            <i class="bi bi-search text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 font-rajdhani">Custom AI Research</h3>
+          <p class="text-gray-300 mb-6 font-montserrat">Advanced research and development in artificial intelligence to power next-generation robotics.</p>
+          <ul class="space-y-2 text-gray-400 mb-6 font-montserrat">
+            <li class="flex items-start">
+              <i class="bi bi-check-circle-fill text-primary mt-1 mr-2"></i>
+              <span>Machine Learning Models</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-check-circle-fill text-primary mt-1 mr-2"></i>
+              <span>Predictive Analytics</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-check-circle-fill text-primary mt-1 mr-2"></i>
+              <span>Computer Vision Solutions</span>
+            </li>
+          </ul>
+          <a href="#" class="text-primary inline-flex items-center hover:text-accent transition-colors font-rajdhani">
+            Learn more <i class="bi bi-arrow-right ml-2"></i>
+          </a>
+        </div>
+        
+        <!-- Service 3 -->
+        <div class="service-card rounded-lg p-6 relative overflow-hidden">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="bg-primary/10 rounded-full w-14 h-14 flex items-center justify-center mb-6 text-primary">
+            <i class="bi bi-gear text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 font-rajdhani">Integration Services</h3>
+          <p class="text-gray-300 mb-6 font-montserrat">Seamless integration of robotic solutions with existing systems and workflows in various industries.</p>
+          <ul class="space-y-2 text-gray-400 mb-6 font-montserrat">
+            <li class="flex items-start">
+              <i class="bi bi-check-circle-fill text-primary mt-1 mr-2"></i>
+              <span>System Interconnectivity</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-check-circle-fill text-primary mt-1 mr-2"></i>
+              <span>Workflow Automation</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-check-circle-fill text-primary mt-1 mr-2"></i>
+              <span>Industry 4.0 Implementation</span>
+            </li>
+          </ul>
+          <a href="#" class="text-primary inline-flex items-center hover:text-accent transition-colors font-rajdhani">
+            Learn more <i class="bi bi-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Additional services section -->
+      <div class="mt-20 grid md:grid-cols-3 gap-8">
+        <div class="col-span-1">
+          <div class="flex items-center space-x-4 mb-8">
+            <div class="bg-primary/10 rounded-full w-12 h-12 flex items-center justify-center text-primary">
+              <i class="bi bi-cpu text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold font-rajdhani">Hardware & Design</h3>
+          </div>
+          <div class="pl-16 text-gray-300 space-y-4 font-montserrat">
+            <p>Custom hardware solutions tailored to specific use cases and environmental constraints.</p>
+            <ul class="space-y-2 text-gray-400">
+              <li class="flex items-start">
+                <i class="bi bi-check text-primary mt-1 mr-2"></i>
+                <span>Sensor Integration</span>
+              </li>
+              <li class="flex items-start">
+                <i class="bi bi-check text-primary mt-1 mr-2"></i>
+                <span>Mechanical Engineering</span>
+              </li>
+              <li class="flex items-start">
+                <i class="bi bi-check text-primary mt-1 mr-2"></i>
+                <span>Industrial Design</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-span-1">
+          <div class="flex items-center space-x-4 mb-8">
+            <div class="bg-primary/10 rounded-full w-12 h-12 flex items-center justify-center text-primary">
+              <i class="bi bi-code-slash text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold font-rajdhani">AI/ML Data Product Development</h3>
+          </div>
+          <div class="pl-16 text-gray-300 space-y-4 font-montserrat">
+            <p>Leveraging machine learning for data-driven product development and enhanced capabilities.</p>
+            <ul class="space-y-2 text-gray-400">
+              <li class="flex items-start">
+                <i class="bi bi-check text-primary mt-1 mr-2"></i>
+                <span>Automated Decision Systems</span>
+              </li>
+              <li class="flex items-start">
+                <i class="bi bi-check text-primary mt-1 mr-2"></i>
+                <span>Real-time Data Processing</span>
+              </li>
+              <li class="flex items-start">
+                <i class="bi bi-check text-primary mt-1 mr-2"></i>
+                <span>Continuous Learning Models</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-span-1">
+          <div class="flex items-center space-x-4 mb-8">
+            <div class="bg-primary/10 rounded-full w-12 h-12 flex items-center justify-center text-primary">
+              <i class="bi bi-tools text-xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold font-rajdhani">Customized Project Building</h3>
+          </div>
+          <div class="pl-16 text-gray-300 space-y-4 font-montserrat">
+            <p>End-to-end project development tailored to your specific business needs and objectives.</p>
+            <ul class="space-y-2 text-gray-400">
+              <li class="flex items-start">
+                <i class="bi bi-check text-primary mt-1 mr-2"></i>
+                <span>Requirements Analysis</span>
+              </li>
+              <li class="flex items-start">
+                <i class="bi bi-check text-primary mt-1 mr-2"></i>
+                <span>Prototype Development</span>
+              </li>
+              <li class="flex items-start">
+                <i class="bi bi-check text-primary mt-1 mr-2"></i>
+                <span>Deployment & Support</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex justify-center mt-12">
+        <a href="#contact" class="px-8 py-3 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark transition-colors duration-300 neon-button font-rajdhani">
+          Get Started
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Model Ensemble Section -->
+  <section class="py-20 bg-dark relative">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,89,255,0.05)_0%,transparent_50%)]"></div>
+    <!-- Decorative robot background -->
+    <div class="absolute left-0 bottom-0 h-full w-1/5 opacity-5">
+      <img src="https://images.unsplash.com/photo-1546776310-eef45dd6d63c?q=80&w=1296&auto=format&fit=crop" alt="Robot Silhouette" class="h-full w-full object-cover object-left">
+    </div>
+    
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Automated Model Ensemble Techniques</h2>
+        <p class="text-gray-300 max-w-2xl mx-auto font-montserrat">Combining multiple models for improved accuracy and robustness in AI-driven applications</p>
+        <div class="h-1 w-24 bg-primary mx-auto mt-6 rounded-full"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Data Preprocessing -->
+        <div class="bg-secondary/50 backdrop-blur-sm rounded-lg p-6 service-card relative overflow-hidden">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="bg-primary/10 rounded-full w-14 h-14 flex items-center justify-center mb-6 text-primary">
+            <i class="bi bi-database-gear text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 font-rajdhani">Data Preprocessing</h3>
+          <p class="text-gray-300 mb-4 font-montserrat">Transforming raw data into a clean and suitable format for machine learning models through various techniques.</p>
+          <ul class="space-y-2 text-gray-400 font-montserrat">
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Handling missing values</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Data imputation techniques</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Custom cleaning methods</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Feature Scaling -->
+        <div class="bg-secondary/50 backdrop-blur-sm rounded-lg p-6 service-card relative overflow-hidden">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="bg-primary/10 rounded-full w-14 h-14 flex items-center justify-center mb-6 text-primary">
+            <i class="bi bi-sliders text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 font-rajdhani">Feature Scaling</h3>
+          <p class="text-gray-300 mb-4 font-montserrat">Normalizing data features to ensure optimal model performance and convergence.</p>
+          <ul class="space-y-2 text-gray-400 font-montserrat">
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Min-Max normalization</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Z-score standardization</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Robust scaling methods</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Dimensionality Reduction -->
+        <div class="bg-secondary/50 backdrop-blur-sm rounded-lg p-6 service-card relative overflow-hidden">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="bg-primary/10 rounded-full w-14 h-14 flex items-center justify-center mb-6 text-primary">
+            <i class="bi bi-diagram-3 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 font-rajdhani">Dimensionality Reduction</h3>
+          <p class="text-gray-300 mb-4 font-montserrat">Techniques to reduce feature dimensions while preserving essential information for model training.</p>
+          <ul class="space-y-2 text-gray-400 font-montserrat">
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Principal Component Analysis (PCA)</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>t-SNE visualization</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Feature selection methods</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Autoencoder Model Design -->
+        <div class="bg-secondary/50 backdrop-blur-sm rounded-lg p-6 service-card relative overflow-hidden">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="bg-primary/10 rounded-full w-14 h-14 flex items-center justify-center mb-6 text-primary">
+            <i class="bi bi-cpu-fill text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 font-rajdhani">Autoencoder Design</h3>
+          <p class="text-gray-300 mb-4 font-montserrat">Neural network architectures for efficient feature encoding, compression and anomaly detection.</p>
+          <ul class="space-y-2 text-gray-400 font-montserrat">
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Undercomplete autoencoders</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Denoising architectures</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Variational implementations</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Model Training -->
+        <div class="bg-secondary/50 backdrop-blur-sm rounded-lg p-6 service-card relative overflow-hidden">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="bg-primary/10 rounded-full w-14 h-14 flex items-center justify-center mb-6 text-primary">
+            <i class="bi bi-graph-up-arrow text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 font-rajdhani">Model Training</h3>
+          <p class="text-gray-300 mb-4 font-montserrat">Optimizing the learning process for model ensembles to achieve superior performance.</p>
+          <ul class="space-y-2 text-gray-400 font-montserrat">
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Hyperparameter optimization</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Cross-validation strategies</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Learning rate scheduling</span>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Model Validation -->
+        <div class="bg-secondary/50 backdrop-blur-sm rounded-lg p-6 service-card relative overflow-hidden">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="bg-primary/10 rounded-full w-14 h-14 flex items-center justify-center mb-6 text-primary">
+            <i class="bi bi-check2-circle text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 font-rajdhani">Model Validation</h3>
+          <p class="text-gray-300 mb-4 font-montserrat">Comprehensive evaluation framework to assess model performance and generalization.</p>
+          <ul class="space-y-2 text-gray-400 font-montserrat">
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Precision-recall analysis</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>ROC curve evaluation</span>
+            </li>
+            <li class="flex items-start">
+              <i class="bi bi-arrow-right-short text-primary mt-1 mr-2"></i>
+              <span>Confusion matrix metrics</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="mt-16 text-center">
+        <a href="#" class="px-8 py-3 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark transition-colors duration-300 neon-button font-rajdhani">
+          Explore Techniques
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="py-20 bg-darker relative">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,89,255,0.05)_0%,transparent_70%)]"></div>
+    <!-- Decorative robot background -->
+    <div class="absolute right-0 top-0 h-full w-1/4 opacity-5">
+      <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?q=80&w=1738&auto=format&fit=crop" alt="Robot Silhouette" class="h-full w-full object-cover object-center">
+    </div>
+    
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Our Team</h2>
+        <div class="h-1 w-24 bg-primary mx-auto mb-8 rounded-full"></div>
+        <p class="text-gray-300 max-w-2xl mx-auto font-montserrat">Meet our dedicated team of experts, each bringing unique skills and insights to drive innovation in robotics</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Team Member 1 -->
+        <div class="team-card group">
+          <div class="relative overflow-hidden rounded-lg mb-4 border border-primary/30">
+            <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHByb2Zlc3Npb25hbCUyMG1hbnxlbnwwfHwwfHx8MA%3D%3D" alt="Dr. Michael Reynolds" class="w-full h-64 object-cover object-center transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <div class="p-4 w-full">
+                <div class="flex justify-center space-x-3">
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-linkedin"></i>
+                  </a>
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-twitter-x"></i>
+                  </a>
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-envelope-fill"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Cyberpunk scan lines -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"></div>
+          </div>
+          <div class="text-center">
+            <h3 class="text-xl font-semibold mb-1 font-rajdhani">Dr. Michael Reynolds</h3>
+            <p class="text-primary font-montserrat">Chief Robotics Officer</p>
+            <div class="flex justify-center mt-2 space-x-1">
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Team Member 2 -->
+        <div class="team-card group">
+          <div class="relative overflow-hidden rounded-lg mb-4 border border-primary/30">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZmVzc2lvbmFsJTIwd29tYW58ZW58MHx8MHx8fDA%3D" alt="Dr. Sarah Chen" class="w-full h-64 object-cover object-center transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <div class="p-4 w-full">
+                <div class="flex justify-center space-x-3">
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-linkedin"></i>
+                  </a>
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-twitter-x"></i>
+                  </a>
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-envelope-fill"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Cyberpunk scan lines -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"></div>
+          </div>
+          <div class="text-center">
+            <h3 class="text-xl font-semibold mb-1 font-rajdhani">Dr. Sarah Chen</h3>
+            <p class="text-primary font-montserrat">AI Research Director</p>
+            <div class="flex justify-center mt-2 space-x-1">
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Team Member 3 -->
+        <div class="team-card group">
+          <div class="relative overflow-hidden rounded-lg mb-4 border border-primary/30">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cHJvZmVzc2lvbmFsJTIwbWFufGVufDB8fDB8fHww" alt="James Wilson" class="w-full h-64 object-cover object-center transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <div class="p-4 w-full">
+                <div class="flex justify-center space-x-3">
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-linkedin"></i>
+                  </a>
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-twitter-x"></i>
+                  </a>
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-envelope-fill"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Cyberpunk scan lines -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"></div>
+          </div>
+          <div class="text-center">
+            <h3 class="text-xl font-semibold mb-1 font-rajdhani">James Wilson</h3>
+            <p class="text-primary font-montserrat">Engineering Lead</p>
+            <div class="flex justify-center mt-2 space-x-1">
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Team Member 4 -->
+        <div class="team-card group">
+          <div class="relative overflow-hidden rounded-lg mb-4 border border-primary/30">
+            <img src="https://images.unsplash.com/photo-1580894732930-0babd100d356?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fHByb2Zlc3Npb25hbCUyMHRlYW18ZW58MHx8MHx8fDA%3D" alt="Innovation Team" class="w-full h-64 object-cover object-center transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-dark/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+              <div class="p-4 w-full">
+                <div class="flex justify-center space-x-3">
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-linkedin"></i>
+                  </a>
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-twitter-x"></i>
+                  </a>
+                  <a href="#" class="text-white hover:text-primary transition-colors">
+                    <i class="bi bi-envelope-fill"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Cyberpunk scan lines -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-0 group-hover:opacity-100 pointer-events-none"></div>
+          </div>
+          <div class="text-center">
+            <h3 class="text-xl font-semibold mb-1 font-rajdhani">R&D Team</h3>
+            <p class="text-primary font-montserrat">Innovation Division</p>
+            <div class="flex justify-center mt-2 space-x-1">
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+              <span class="w-2 h-2 bg-primary rounded-full"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex justify-center mt-12">
+        <a href="#" class="px-8 py-3 bg-transparent border border-primary text-primary font-semibold rounded-md hover:bg-primary/10 transition-colors duration-300 font-rajdhani">
+          View Full Team
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Insights Section -->
+  <section id="tech-insights" class="py-20 bg-dark relative">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(0,89,255,0.05)_0%,transparent_50%)]"></div>
+    <!-- Decorative robot background -->
+    <div class="absolute left-0 bottom-0 h-full w-1/5 opacity-5">
+      <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?q=80&w=1736&auto=format&fit=crop" alt="Robot Silhouette" class="h-full w-full object-cover object-left">
+    </div>
+    
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Technology Insights</h2>
+        <div class="h-1 w-24 bg-primary mx-auto mb-8 rounded-full"></div>
+        <p class="text-gray-300 max-w-2xl mx-auto font-montserrat">Track real-time tech trends and AI advancements to inform your strategic decisions</p>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Tech Chart Section -->
+        <div class="chart-container p-6 border border-primary/30 relative">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-semibold font-rajdhani">Robotics Technology Index</h3>
+            <div class="flex space-x-2">
+              <button class="px-3 py-1 bg-secondary text-white text-sm rounded hover:bg-secondary/80 transition-colors" onclick="updateTimeframe('1d')">1D</button>
+              <button class="px-3 py-1 bg-secondary text-white text-sm rounded hover:bg-secondary/80 transition-colors" onclick="updateTimeframe('1w')">1W</button>
+              <button class="px-3 py-1 bg-secondary text-white text-sm rounded hover:bg-secondary/80 transition-colors" onclick="updateTimeframe('1m')">1M</button>
+              <button class="px-3 py-1 bg-secondary text-white text-sm rounded hover:bg-secondary/80 transition-colors" onclick="updateTimeframe('1y')">1Y</button>
+            </div>
+          </div>
+          <div id="stockChart" class="w-full h-80"></div>
+          
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            <div class="bg-secondary/50 p-3 rounded border border-primary/10">
+              <div class="flex justify-between">
+                <span class="text-gray-400 font-montserrat">ROBO</span>
+                <span class="text-green-400 font-montserrat">+2.8%</span>
+              </div>
+              <div class="text-lg font-semibold font-rajdhani">$142.67</div>
+            </div>
+            <div class="bg-secondary/50 p-3 rounded border border-primary/10">
+              <div class="flex justify-between">
+                <span class="text-gray-400 font-montserrat">AIAI</span>
+                <span class="text-red-400 font-montserrat">-1.2%</span>
+              </div>
+              <div class="text-lg font-semibold font-rajdhani">$386.92</div>
+            </div>
+            <div class="bg-secondary/50 p-3 rounded border border-primary/10">
+              <div class="flex justify-between">
+                <span class="text-gray-400 font-montserrat">BOTX</span>
+                <span class="text-green-400 font-montserrat">+4.5%</span>
+              </div>
+              <div class="text-lg font-semibold font-rajdhani">$78.21</div>
+            </div>
+            <div class="bg-secondary/50 p-3 rounded border border-primary/10">
+              <div class="flex justify-between">
+                <span class="text-gray-400 font-montserrat">TECH</span>
+                <span class="text-green-400 font-montserrat">+0.7%</span>
+              </div>
+              <div class="text-lg font-semibold font-rajdhani">$227.45</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Technology Adoption Data Section -->
+        <div class="chart-container p-6 border border-primary/30 relative">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-semibold font-rajdhani">Technology Adoption Rates</h3>
+            <div class="flex space-x-2">
+              <button class="px-3 py-1 bg-secondary text-white text-sm rounded hover:bg-secondary/80 transition-colors" onclick="updateAdoptionData('industry')">By Industry</button>
+              <button class="px-3 py-1 bg-secondary text-white text-sm rounded hover:bg-secondary/80 transition-colors" onclick="updateAdoptionData('region')">By Region</button>
+            </div>
+          </div>
+          <div id="adoptionChart" class="w-full h-80"></div>
+          
+          <div class="bg-secondary/50 p-4 rounded mt-6 border border-primary/10">
+            <h4 class="text-lg font-semibold mb-3 font-rajdhani">Latest Technology Implementation Projects</h4>
+            <ul class="space-y-3 font-montserrat">
+              <li class="flex justify-between items-center border-b border-gray-700 pb-2">
+                <div>
+                  <span class="text-primary">AI-Powered Manufacturing</span>
+                  <p class="text-sm text-gray-400">Smart factories with predictive maintenance</p>
+                </div>
+                <span class="bg-green-900/50 text-green-400 text-xs py-1 px-2 rounded border border-green-800">Active</span>
+              </li>
+              <li class="flex justify-between items-center border-b border-gray-700 pb-2">
+                <div>
+                  <span class="text-primary">Healthcare Robotics</span>
+                  <p class="text-sm text-gray-400">Surgical assistance and patient care</p>
+                </div>
+                <span class="bg-yellow-900/50 text-yellow-400 text-xs py-1 px-2 rounded border border-yellow-800">In Development</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <div>
+                  <span class="text-primary">Retail Automation</span>
+                  <p class="text-sm text-gray-400">Customer service and inventory management</p>
+                </div>
+                <span class="bg-blue-900/50 text-blue-400 text-xs py-1 px-2 rounded border border-blue-800">Planning</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Market Trends -->
+      <div class="mt-16">
+        <h3 class="text-2xl font-semibold mb-8 text-center font-orbitron">AI-Driven Market Analysis</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-secondary/50 backdrop-blur-sm p-6 rounded-lg border border-primary/20 relative overflow-hidden">
+            <!-- Cyberpunk corner decorations -->
+            <div class="absolute top-0 right-0 w-12 h-12">
+              <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+              <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+            </div>
+            <div class="flex items-center mb-4">
+              <div class="bg-primary/20 p-3 rounded-full mr-4">
+                <i class="bi bi-graph-up text-primary text-xl"></i>
+              </div>
+              <h4 class="text-lg font-semibold font-rajdhani">Growth Sectors</h4>
+            </div>
+            <ul class="space-y-3 font-montserrat">
+              <li class="flex justify-between items-center">
+                <span>Industrial Automation</span>
+                <span class="text-green-400">+18.7%</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>Medical Robotics</span>
+                <span class="text-green-400">+24.2%</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>Agricultural Drones</span>
+                <span class="text-green-400">+15.9%</span>
+              </li>
+              <li class="flex justify-between items-center">
+                <span>Security Robots</span>
+                <span class="text-green-400">+12.3%</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-secondary/50 backdrop-blur-sm p-6 rounded-lg border border-primary/20 relative overflow-hidden">
+            <!-- Cyberpunk corner decorations -->
+            <div class="absolute top-0 right-0 w-12 h-12">
+              <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+              <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+            </div>
+            <div class="flex items-center mb-4">
+              <div class="bg-primary/20 p-3 rounded-full mr-4">
+                <i class="bi bi-lightning-charge text-primary text-xl"></i>
+              </div>
+              <h4 class="text-lg font-semibold font-rajdhani">Emerging Technologies</h4>
+            </div>
+            <ul class="space-y-3 font-montserrat">
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full mr-2"></div>
+                <span>Neuromorphic Computing</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full mr-2"></div>
+                <span>Soft Robotics Materials</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full mr-2"></div>
+                <span>Edge AI Processing</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full mr-2"></div>
+                <span>Quantum Sensors</span>
+              </li>
+              <li class="flex items-center">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full mr-2"></div>
+                <span>Biomimetic Systems</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-secondary/50 backdrop-blur-sm p-6 rounded-lg border border-primary/20 relative overflow-hidden">
+            <!-- Cyberpunk corner decorations -->
+            <div class="absolute top-0 right-0 w-12 h-12">
+              <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+              <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+            </div>
+            <div class="flex items-center mb-4">
+              <div class="bg-primary/20 p-3 rounded-full mr-4">
+                <i class="bi bi-clock-history text-primary text-xl"></i>
+              </div>
+              <h4 class="text-lg font-semibold font-rajdhani">Market Forecasts</h4>
+            </div>
+            <div id="forecastChart" class="h-48 mb-3"></div>
+            <div class="text-center">
+              <span class="text-xs text-gray-400 font-montserrat">Projected growth 2023-2028</span>
+            </div>
+            <div class="mt-4 text-center">
+              <span class="inline-block px-3 py-1 bg-primary/20 rounded text-primary font-montserrat">
+                Estimated CAGR: 22.8%
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 bg-darker relative">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,89,255,0.05)_0%,transparent_70%)]"></div>
+    <!-- Decorative robot background -->
+    <div class="absolute right-0 top-0 h-full w-1/5 opacity-5">
+      <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=1740&auto=format&fit=crop" alt="Robot Silhouette" class="h-full w-full object-cover object-right">
+    </div>
+    
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Trusted by Industry Leaders</h2>
+        <div class="h-1 w-24 bg-primary mx-auto mb-8 rounded-full"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="bg-secondary/30 backdrop-blur-sm p-6 rounded-lg service-card relative border border-primary/20">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="text-primary text-5xl absolute top-6 left-6 opacity-20">
+            <i class="bi bi-quote"></i>
+          </div>
+          <div class="relative z-10">
+            <p class="text-gray-300 mb-6 italic font-montserrat">
+              "Mekronix's custom robotics solutions have transformed our manufacturing process, increasing efficiency by 37% while reducing operational costs."
+            </p>
+            <div class="flex items-center">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cHJvZmVzc2lvbmFsJTIwbWFufGVufDB8fDB8fHww" alt="John Matthews" class="w-12 h-12 rounded-full object-cover mr-4 border border-primary/30">
+              <div>
+                <h4 class="font-semibold font-rajdhani">John Matthews</h4>
+                <p class="text-gray-400 text-sm font-montserrat">CTO, TechManufacturing Inc.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="bg-secondary/30 backdrop-blur-sm p-6 rounded-lg service-card relative border border-primary/20">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="text-primary text-5xl absolute top-6 left-6 opacity-20">
+            <i class="bi bi-quote"></i>
+          </div>
+          <div class="relative z-10">
+            <p class="text-gray-300 mb-6 italic font-montserrat">
+              "Their AI research team helped us develop a predictive maintenance system that has virtually eliminated unexpected downtime in our operations."
+            </p>
+            <div class="flex items-center">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZmVzc2lvbmFsJTIwd29tYW58ZW58MHx8MHx8fDA%3D" alt="Emily Rodriguez" class="w-12 h-12 rounded-full object-cover mr-4 border border-primary/30">
+              <div>
+                <h4 class="font-semibold font-rajdhani">Emily Rodriguez</h4>
+                <p class="text-gray-400 text-sm font-montserrat">Operations Director, Global Logistics</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="bg-secondary/30 backdrop-blur-sm p-6 rounded-lg service-card relative border border-primary/20">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="text-primary text-5xl absolute top-6 left-6 opacity-20">
+            <i class="bi bi-quote"></i>
+          </div>
+          <div class="relative z-10">
+            <p class="text-gray-300 mb-6 italic font-montserrat">
+              "We've partnered with Mekronix for three years now, and their integration services have consistently delivered exceptional results for our healthcare automation."
+            </p>
+            <div class="flex items-center">
+              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cHJvZmVzc2lvbmFsJTIwbWFufGVufDB8fDB8fHww" alt="Dr. Michael Chen" class="w-12 h-12 rounded-full object-cover mr-4 border border-primary/30">
+              <div>
+                <h4 class="font-semibold font-rajdhani">Dr. Michael Chen</h4>
+                <p class="text-gray-400 text-sm font-montserrat">Innovation Lead, MediTech Solutions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Client Logos -->
+      <div class="mt-20">
+        <h3 class="text-xl text-center mb-10 font-rajdhani">Our Clients</h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+          <div class="flex items-center justify-center h-16 opacity-70 hover:opacity-100 transition-opacity">
+            <div class="w-full h-10 bg-primary/10 rounded flex items-center justify-center border border-primary/30">
+              <span class="text-primary font-semibold font-rajdhani">TechCorp</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-center h-16 opacity-70 hover:opacity-100 transition-opacity">
+            <div class="w-full h-10 bg-primary/10 rounded flex items-center justify-center border border-primary/30">
+              <span class="text-primary font-semibold font-rajdhani">InnoServe</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-center h-16 opacity-70 hover:opacity-100 transition-opacity">
+            <div class="w-full h-10 bg-primary/10 rounded flex items-center justify-center border border-primary/30">
+              <span class="text-primary font-semibold font-rajdhani">MediTech</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-center h-16 opacity-70 hover:opacity-100 transition-opacity">
+            <div class="w-full h-10 bg-primary/10 rounded flex items-center justify-center border border-primary/30">
+              <span class="text-primary font-semibold font-rajdhani">RoboSys</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-center h-16 opacity-70 hover:opacity-100 transition-opacity">
+            <div class="w-full h-10 bg-primary/10 rounded flex items-center justify-center border border-primary/30">
+              <span class="text-primary font-semibold font-rajdhani">FutureAI</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-center h-16 opacity-70 hover:opacity-100 transition-opacity">
+            <div class="w-full h-10 bg-primary/10 rounded flex items-center justify-center border border-primary/30">
+              <span class="text-primary font-semibold font-rajdhani">NexGenics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Robots Showcase Section -->
+  <section class="py-20 bg-dark relative">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,89,255,0.05)_0%,transparent_70%)]"></div>
+    <!-- Cyber grid lines -->
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/1 to-transparent pointer-events-none"></div>
+    
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Our Robotic Solutions</h2>
+        <div class="h-1 w-24 bg-primary mx-auto mb-8 rounded-full"></div>
+        <p class="text-gray-300 max-w-2xl mx-auto font-montserrat">Explore our cutting-edge robots designed to transform industries and enhance productivity</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Robot 1 -->
+        <div class="bg-secondary/30 backdrop-blur-sm rounded-lg overflow-hidden service-card border border-primary/20 relative">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12 z-10">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="h-64 overflow-hidden relative">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-70 z-10 pointer-events-none"></div>
+            <img src="https://images.unsplash.com/photo-1561557944-6e7860d1a7eb?q=80&w=1738&auto=format&fit=crop" alt="Industrial Robot" class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2 font-rajdhani">MX-8000 Industrial</h3>
+            <p class="text-gray-300 mb-4 font-montserrat">High-precision industrial robot for manufacturing automation with advanced sensory capabilities.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-primary/10 text-primary text-xs py-1 px-2 rounded font-montserrat border border-primary/30">Manufacturing</span>
+              <span class="bg-primary/10 text-primary text-xs py-1 px-2 rounded font-montserrat border border-primary/30">Precision</span>
+              <span class="bg-primary/10 text-primary text-xs py-1 px-2 rounded font-montserrat border border-primary/30">Heavy Duty</span>
+            </div>
+            <a href="#" class="text-primary inline-flex items-center hover:text-accent transition-colors font-rajdhani">
+              View specifications <i class="bi bi-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Robot 2 -->
+        <div class="bg-secondary/30 backdrop-blur-sm rounded-lg overflow-hidden service-card border border-primary/20 relative">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12 z-10">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="h-64 overflow-hidden relative">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-70 z-10 pointer-events-none"></div>
+            <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=1740&auto=format&fit=crop" alt="Medical Robot" class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2 font-rajdhani">MedAssist X3</h3>
+            <p class="text-gray-300 mb-4 font-montserrat">Healthcare robot designed for patient care, medication management, and clinical assistance.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-primary/10 text-primary text-xs py-1 px-2 rounded font-montserrat border border-primary/30">Healthcare</span>
+              <span class="bg-primary/10 text-primary text-xs py-1 px-2 rounded font-montserrat border border-primary/30">Assistance</span>
+              <span class="bg-primary/10 text-primary text-xs py-1 px-2 rounded font-montserrat border border-primary/30">Smart</span>
+            </div>
+            <a href="#" class="text-primary inline-flex items-center hover:text-accent transition-colors font-rajdhani">
+              View specifications <i class="bi bi-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Robot 3 -->
+        <div class="bg-secondary/30 backdrop-blur-sm rounded-lg overflow-hidden service-card border border-primary/20 relative">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12 z-10">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="h-64 overflow-hidden relative">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-70 z-10 pointer-events-none"></div>
+            <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?q=80&w=1738&auto=format&fit=crop" alt="Robot" class="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2 font-rajdhani">Companion LX</h3>
+            <p class="text-gray-300 mb-4 font-montserrat">Interactive humanoid robot for customer service, education, and social engagement applications.</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-primary/10 text-primary text-xs py-1 px-2 rounded font-montserrat border border-primary/30">Service</span>
+              <span class="bg-primary/10 text-primary text-xs py-1 px-2 rounded font-montserrat border border-primary/30">Interactive</span>
+              <span class="bg-primary/10 text-primary text-xs py-1 px-2 rounded font-montserrat border border-primary/30">AI-Powered</span>
+            </div>
+            <a href="#" class="text-primary inline-flex items-center hover:text-accent transition-colors font-rajdhani">
+              View specifications <i class="bi bi-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-16 text-center">
+        <a href="#" class="px-8 py-3 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark transition-colors duration-300 neon-button font-rajdhani">
+          Explore All Robots
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Glossary Section -->
+  <section class="py-20 bg-darker relative">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,89,255,0.05)_0%,transparent_70%)]"></div>
+    <!-- Decorative robot background -->
+    <div class="absolute left-0 top-0 h-full w-1/6 opacity-5">
+      <img src="https://images.unsplash.com/photo-1507835661088-ac250accc4d1?q=80&w=1974&auto=format&fit=crop" alt="Robot Silhouette" class="h-full w-full object-cover object-left">
+    </div>
+    
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Robotics & AI Glossary</h2>
+        <div class="h-1 w-24 bg-primary mx-auto mb-8 rounded-full"></div>
+        <p class="text-gray-300 max-w-2xl mx-auto font-montserrat">Key terms and concepts to help you navigate the world of robotics and artificial intelligence</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-secondary/30 backdrop-blur-sm p-6 rounded-lg border border-primary/20 relative service-card">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 text-primary font-rajdhani">Machine Learning</h3>
+          <p class="text-gray-300 font-montserrat">
+            A subset of artificial intelligence that enables systems to learn and improve from experience without explicit programming. 
+            Common types include supervised, unsupervised, and reinforcement learning.
+          </p>
+        </div>
+        
+        <div class="bg-secondary/30 backdrop-blur-sm p-6 rounded-lg border border-primary/20 relative service-card">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 text-primary font-rajdhani">Neural Networks</h3>
+          <p class="text-gray-300 font-montserrat">
+            Computing systems inspired by biological neural networks designed to recognize patterns. 
+            Deep neural networks with multiple layers can learn complex representations of data.
+          </p>
+        </div>
+        
+        <div class="bg-secondary/30 backdrop-blur-sm p-6 rounded-lg border border-primary/20 relative service-card">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 text-primary font-rajdhani">Computer Vision</h3>
+          <p class="text-gray-300 font-montserrat">
+            A field of AI that enables computers to derive meaningful information from digital images or videos, 
+            allowing machines to identify and classify objects.
+          </p>
+        </div>
+        
+        <div class="bg-secondary/30 backdrop-blur-sm p-6 rounded-lg border border-primary/20 relative service-card">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 text-primary font-rajdhani">Natural Language Processing</h3>
+          <p class="text-gray-300 font-montserrat">
+            The ability of computer systems to understand, interpret, and generate human language,
+            facilitating interaction between humans and machines through speech or text.
+          </p>
+        </div>
+        
+        <div class="bg-secondary/30 backdrop-blur-sm p-6 rounded-lg border border-primary/20 relative service-card">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 text-primary font-rajdhani">Robotic Process Automation (RPA)</h3>
+          <p class="text-gray-300 font-montserrat">
+            Technology that automates repetitive tasks by configuring software robots to capture and interpret
+            applications for processing transactions, manipulating data, and communicating with other systems.
+          </p>
+        </div>
+        
+        <div class="bg-secondary/30 backdrop-blur-sm p-6 rounded-lg border border-primary/20 relative service-card">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <h3 class="text-xl font-semibold mb-4 text-primary font-rajdhani">Model Ensemble</h3>
+          <p class="text-gray-300 font-montserrat">
+            A technique that combines multiple learning algorithms to improve overall prediction performance,
+            often resulting in better accuracy and robustness than individual models.
+          </p>
+        </div>
+      </div>
+      
+      <div class="flex justify-center mt-12">
+        <a href="#" class="px-8 py-3 bg-transparent border border-primary text-primary font-semibold rounded-md hover:bg-primary/10 transition-colors duration-300 font-rajdhani">
+          View Full Glossary
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section class="py-20 bg-dark relative">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(0,89,255,0.05)_0%,transparent_70%)]"></div>
+    <!-- Decorative robot background -->
+    <div class="absolute right-0 bottom-0 h-full w-1/6 opacity-5">
+      <img src="https://images.unsplash.com/photo-1569171181682-2c735f5a8511?q=80&w=1748&auto=format&fit=crop" alt="Robot Silhouette" class="h-full w-full object-cover object-right">
+    </div>
+    
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Resources & Learning</h2>
+        <div class="h-1 w-24 bg-primary mx-auto mb-8 rounded-full"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Resource 1 -->
+        <div class="bg-secondary/50 backdrop-blur-sm rounded-lg overflow-hidden service-card border border-primary/20 relative">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12 z-10">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="h-48 bg-gray-700/30 relative">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <i class="bi bi-journal-text text-5xl text-primary/70"></i>
+            </div>
+            <!-- Cyberpunk scanlines -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2 font-rajdhani">Introduction to Model Ensemble Techniques</h3>
+            <p class="text-gray-300 mb-4 font-montserrat">A comprehensive guide to understanding and implementing various model ensemble approaches.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-primary text-sm font-montserrat">Whitepaper</span>
+              <a href="#" class="text-white hover:text-primary transition-colors">
+                <i class="bi bi-download"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Resource 2 -->
+        <div class="bg-secondary/50 backdrop-blur-sm rounded-lg overflow-hidden service-card border border-primary/20 relative">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12 z-10">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="h-48 bg-gray-700/30 relative">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <i class="bi bi-play-circle text-5xl text-primary/70"></i>
+            </div>
+            <!-- Cyberpunk scanlines -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2 font-rajdhani">Data Preprocessing Best Practices Webinar</h3>
+            <p class="text-gray-300 mb-4 font-montserrat">Learn essential techniques for preparing data for machine learning models effectively.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-primary text-sm font-montserrat">Video - 45 min</span>
+              <a href="#" class="text-white hover:text-primary transition-colors">
+                <i class="bi bi-play-fill"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Resource 3 -->
+        <div class="bg-secondary/50 backdrop-blur-sm rounded-lg overflow-hidden service-card border border-primary/20 relative">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12 z-10">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <div class="h-48 bg-gray-700/30 relative">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <i class="bi bi-code-square text-5xl text-primary/70"></i>
+            </div>
+            <!-- Cyberpunk scanlines -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2 font-rajdhani">Feature Scaling & Normalization Techniques</h3>
+            <p class="text-gray-300 mb-4 font-montserrat">Coding examples and comparison of different scaling approaches for various datasets.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-primary text-sm font-montserrat">Code Repository</span>
+              <a href="#" class="text-white hover:text-primary transition-colors">
+                <i class="bi bi-github"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex justify-center mt-12">
+        <a href="#" class="px-8 py-3 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark transition-colors duration-300 neon-button font-rajdhani">
+          Browse Resources
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-darker relative">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(0,89,255,0.05)_0%,transparent_70%)]"></div>
+    <!-- Decorative robot background -->
+    <div class="absolute right-0 top-0 h-full w-1/5 opacity-5">
+      <img src="https://images.unsplash.com/photo-1507835661088-ac250accc4d1?q=80&w=1974&auto=format&fit=crop" alt="Robot Silhouette" class="h-full w-full object-cover object-right">
+    </div>
+    
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 font-orbitron">Contact Us</h2>
+        <div class="h-1 w-24 bg-primary mx-auto mb-8 rounded-full"></div>
+        <p class="text-gray-300 max-w-2xl mx-auto font-montserrat">Ready to revolutionize your business with cutting-edge robotics? Get in touch with our team today.</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div class="bg-secondary/30 backdrop-blur-sm p-8 rounded-lg border border-primary/20 relative service-card">
+          <!-- Cyberpunk corner decorations -->
+          <div class="absolute top-0 right-0 w-12 h-12">
+            <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+            <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+          </div>
+          <h3 class="text-2xl font-semibold mb-6 font-rajdhani">Get In Touch</h3>
+          <form x-data="contactForm()" @submit.prevent="submitForm">
+            <div class="mb-6">
+              <label for="name" class="block text-gray-300 mb-2 font-montserrat">Full Name</label>
+              <input type="text" id="name" x-model="formData.name" class="w-full bg-dark border border-primary/30 rounded-md py-3 px-4 text-white focus:outline-none focus:border-primary transition-colors font-montserrat" placeholder="Your name" required>
+            </div>
+            
+            <div class="mb-6">
+              <label for="email" class="block text-gray-300 mb-2 font-montserrat">Email Address</label>
+              <input type="email" id="email" x-model="formData.email" class="w-full bg-dark border border-primary/30 rounded-md py-3 px-4 text-white focus:outline-none focus:border-primary transition-colors font-montserrat" placeholder="your.email@example.com" required>
+            </div>
+            
+            <div class="mb-6">
+              <label for="subject" class="block text-gray-300 mb-2 font-montserrat">Subject</label>
+              <select id="subject" x-model="formData.subject" class="w-full bg-dark border border-primary/30 rounded-md py-3 px-4 text-white focus:outline-none focus:border-primary transition-colors font-montserrat" required>
+                <option value="">Select a subject</option>
+                <option value="Custom Robotics">Custom Robotics</option>
+                <option value="AI Research">AI Research</option>
+                <option value="Integration Services">Integration Services</option>
+                <option value="General Inquiry">General Inquiry</option>
+                <option value="Support">Technical Support</option>
+              </select>
+            </div>
+            
+            <div class="mb-6">
+              <label for="message" class="block text-gray-300 mb-2 font-montserrat">Message</label>
+              <textarea id="message" x-model="formData.message" rows="5" class="w-full bg-dark border border-primary/30 rounded-md py-3 px-4 text-white focus:outline-none focus:border-primary transition-colors font-montserrat" placeholder="Tell us about your project or inquiry..." required></textarea>
+            </div>
+            
+            <div class="flex items-center mb-6">
+              <input type="checkbox" id="consent" x-model="formData.consent" class="mr-2 accent-primary" required>
+              <label for="consent" class="text-gray-300 text-sm font-montserrat">I agree to receive communications from Mekronix regarding my inquiry.</label>
+            </div>
+            
+            <button type="submit" class="w-full bg-primary text-white font-semibold py-3 px-4 rounded-md hover:bg-primary-dark transition-colors duration-300 neon-button font-rajdhani" :class="{'opacity-70 cursor-not-allowed': isSubmitting}" :disabled="isSubmitting">
+              <span x-show="!isSubmitting">Send Message</span>
+              <span x-show="isSubmitting" class="flex items-center justify-center">
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Processing...
+              </span>
+            </button>
+            
+            <div x-show="formSuccess" class="mt-4 p-3 bg-green-900/50 border border-green-500 text-green-400 rounded-md font-montserrat">
+              Thank you for your message! We'll get back to you shortly.
+            </div>
+            
+            <div x-show="formError" class="mt-4 p-3 bg-red-900/50 border border-red-500 text-red-400 rounded-md font-montserrat">
+              There was an error submitting your message. Please try again.
+            </div>
+          </form>
+        </div>
+        
+        <div class="space-y-8 font-montserrat">
+          <div>
+            <h3 class="text-2xl font-semibold mb-6 font-rajdhani">Contact Information</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="bg-primary/10 rounded-full w-10 h-10 flex items-center justify-center text-primary mr-4 mt-1 border border-primary/30">
+                  <i class="bi bi-geo-alt"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1 font-rajdhani">Headquarters</h4>
+                  <p class="text-gray-300">
+                    #6/2 C Ramaiah Layout<br>
+                    Ramchandrapur Main Road<br>
+                    Vidyaranyapura Post, Bangalore 560097
+                  </p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-primary/10 rounded-full w-10 h-10 flex items-center justify-center text-primary mr-4 mt-1 border border-primary/30">
+                  <i class="bi bi-envelope"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1 font-rajdhani">Email</h4>
+                  <p class="text-gray-300">
+                    mekronixtech@gmail.com<br>
+                  </p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-primary/10 rounded-full w-10 h-10 flex items-center justify-center text-primary mr-4 mt-1 border border-primary/30">
+                  <i class="bi bi-telephone"></i>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-1 font-rajdhani">Phone</h4>
+                  <p class="text-gray-300">
+                    +91 9008862012<br>
+                    +91 7975650006<br>
+                    +91 9008934110
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-2xl font-semibold mb-6 font-rajdhani">Connect With Us</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="bg-primary/10 rounded-full w-12 h-12 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors border border-primary/30">
+                <i class="bi bi-linkedin"></i>
+              </a>
+              <a href="#" class="bg-primary/10 rounded-full w-12 h-12 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors border border-primary/30">
+                <i class="bi bi-twitter-x"></i>
+              </a>
+              <a href="https://www.instagram.com/mekronix/?next=%2F" target="_blank" class="bg-primary/10 rounded-full w-12 h-12 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors border border-primary/30">
+                <i class="bi bi-instagram"></i>
+              </a>
+              <a href="#" class="bg-primary/10 rounded-full w-12 h-12 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors border border-primary/30">
+                <i class="bi bi-facebook"></i>
+              </a>
+              <a href="#" class="bg-primary/10 rounded-full w-12 h-12 flex items-center justify-center text-primary hover:bg-primary/20 transition-colors border border-primary/30">
+                <i class="bi bi-youtube"></i>
+              </a>
+            </div>
+          </div>
+          
+          <div class="bg-secondary/30 backdrop-blur-sm p-6 rounded-lg border border-primary/20 relative service-card">
+            <!-- Cyberpunk corner decorations -->
+            <div class="absolute top-0 right-0 w-12 h-12">
+              <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+              <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+            </div>
+            <h3 class="text-xl font-semibold mb-4 font-rajdhani">Business Hours</h3>
+            <ul class="space-y-2">
+              <li class="flex justify-between">
+                <span>Monday - Friday:</span>
+                <span>9:00 AM - 6:00 PM IST</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Saturday:</span>
+                <span>10:00 AM - 2:00 PM IST</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Sunday:</span>
+                <span>Closed</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-secondary/30 backdrop-blur-sm p-6 rounded-lg border border-primary/20 relative service-card">
+            <!-- Cyberpunk corner decorations -->
+            <div class="absolute top-0 right-0 w-12 h-12">
+              <div class="absolute top-0 right-0 w-3 h-1 bg-primary"></div>
+              <div class="absolute top-0 right-0 w-1 h-3 bg-primary"></div>
+            </div>
+            <h3 class="text-xl font-semibold mb-4 font-rajdhani">QR Code</h3>
+            <div class="flex justify-center">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAADuNJREFUeF7tnVGS2zgMRJ2T7dxsd3OyTU5m7+yMR5IoNgmATVJ8/Mw4KIJAd4OUbCe/f/76+2twIQESeEng9+Pj4zcpIcgDk3f18hDg+kVcUASxJqsHpIRrCTQ5yANpkdVMtHutVLk+E/h4PPyXzIQSQWx6rrJ6JOp8vXzF+5eDlIMIkrJbHpLnQKw1hhxkVZk8xLrHStVLDlJKkKkWD7HuKZmrV3rkQA7yvFnwEPueKlXv1UPLQR44rLJ6JOp8vXKQ5xznIRY+Vao3OUgpQaZaPMQ+nCWvP3KQXYnxENuuKlWrHKSUIFMtHmIfzpLXHznIrsR4iG1Xlao1OUgpQaZaPMQ+nCWvP3KQXYnxENuuKlWrHKSUIFMtHmIfzpLXHznIrsR4iG1Xlao1OUgpQaZaPMQ+nCWvP3KQXYnxENuuKlWrHKSUIFMtHmIfzpLXHznIrsR4iG1Xlao1OUgpQaZaPMQ+nCWvP3KQXYnxENuuKlWrHKSUIFMtHmIfzpLXHznIrsR4iG1Xlao1OUgpQaZaPMQ+nCWvP3KQXYnxENuuKlWrHKSUIFMtHmIfzpLXHznIrsR4iG1Xlao1OUgpQaZaPMQ+nCWvP3KQXYnxENuuKlWrHKSUIFMtHmIfzpLXHznIrsR4iG1Xlao1OUgpQaZaPMQ+nCWvP3KQXYnxENuuKlWrHKSUIFMtHmIfzpLXHznIrsR4iG1Xlao1OUgpQaZaPMQ+nCWvP3KQXYnxENuuKlWrHKSUIFMtHmIfzpLXHznIrsR4iG1Xlao1OUgpQaZaPMQ+nCWvP3KQXYnxENuuKlWrHKSUIFMtHmIfzpLXHznIrsR4iG1Xlao1OUgpQaZaPMQ+nCWvP8sH+f/fv0oR/vnrr1K9owLfj4+P30dbf977/Xj8vON5lYP8hpEcZP/QrhxkOUjp0cJODlJKMKnmUg6iB4lq3JXr5CAlgHKQUoI8tUQP4rEBc13lIKUg5SClBOUgXhswV7ccpBSkHKSUoBzEawPmunKQUpBykFKCchCvDZjrKgcpBSkHKSUoB/HagLmucpBSkHKQUoJyEK8NmOsqBykFKQcpJSgH8dqAua5ykFKQcpBSgnIQrw2Y6yoHKQUpByklKAfx2oC5rnKQUpBykFKCchCvDZjrKgcpBSkHKSUoB/HagLmucpBSkHKQUoJyEK8NmOsqBykFKQcpJSgH8dqAua5ykFKQcpBSgnIQrw2Y6yoHKQUpByklKAfx2oC5rnKQUpBykFKCchCvDZjrKgcpBSkHKSUoB/HagLmucpBSkHKQUoJyEK8NmOsqBykFKQcpJSgH8dqAua5ykFKQcpBSgnIQrw2Y6yoHKQUpByklKAfx2oC5rnKQUpBykFKCchCvDZjrKgcpBSkHKSUoB/HagLmucpBSkHKQUoJyEK8NmOsqBykFKQcpJSgH8dqAua5ykFKQcpBSgnIQrw2Y6yoHKQUpByklKAfx2oC5rnKQUpBykFKCchCvDZjrKgcpBSkHKSUoB/HagLmucpBSkHKQUoJyEK8NmOsqBykFKQcpJSgH8dqAua5ykFKQcpBSgnIQrw2Y6yoHKQUpByklKAfx2oC5rnKQyzD/+fuvudQWrfb9+Ph4vKv9sYM8jrYbZMfjkXY/dlDn+uQgBzlAOcheYuUgB3lIVA6yl1g5yEEeEpWD7CVWDnKQh0TlIHuJlYMc5CFROcheYuUgB3lIVA6yl1g5yEEeEpWD7CU2PQf5t1DRz1Nqrep0n3X7zterlWDrPjnIAcJaDrKX41aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197Es5yAHCWA6yl6NWjnKQvX3sSznIAcJYDrKXo1aOcpC9fexLOcgBwlgOspejVo5ykL197EtbOMj34+Pjd2kL1TolUErg4/H4KRU80Sjl+wRZP+k9FTnIgXqx1Ekegr10O8iGVNk+UchBTmLm1Ts9ZHLvLLFzLQ88zhzk+E4rqQRJnLmmPGVSKwaS64sFtvV61WauHKSd6xzv9JAZSXmJ9T+P9PuJvDQ6yIZUmT79yEEO1IulTvIQ7DHvHGRDqsyfXtOvsF6tn3ZjdRIuPeQbkhxkdTssWs9DFg1jQalyEHoLrJOTHGRBvYKmlqo2QfRJzmOumS9SOcjsKv79Dg8571jTUjlIuuybJegh5zmrHORYP7fvRg85z3w5SHHvbdmNHnKeuXKQY/0sB3mRqIecZ64cRAPxklbSd21HZ8lByn2mB/mSoIecZ64cpNhnesjZT/ByEDnIG5p6yHnmykGO9ZMcRA7yhlbSCbbZ2fKxPjnIx+M/D5H23TcPOc9cOUixz/SQs5/g5SBykDc09ZDzzJWDHOsnOYgc5A2tpBNss7PlY31ykI/Hfx4i7btvHnKeuXKQYp/pIWc/wctB5CBvaOoh55krBznWT3IQOcgbWkkn2GZny8f65CAfjx/6PcjsFDd/n5Y0y40c4SDPCb2q26TfJqV9I4Kv//qQx+PXRZ9+PrUf9g3+9/8oSk5ykCKoo1w5SJHoHGR9B5GDyEF+Jp/0rYkc5GWP6UEuecjrM/+BxCY+4vCXC6fqTe1vB9FBzl3DcpAzHCTxETDxQZ/Yd/3tIP6y4PYPOjnIlQ4y8Smf2Esb1HVykCvfYr36pE/sJTnI9f2VuF8Se2mDuk4OcqWD6CHn+SvxESuxlzao6+QgVzpI4iN24n5J7KUN6jo5yJUOooec56/ER6zEXtqgrpODXOkgeoinvxL3S2IvbVDXyUGudBA9ZP/7/5n3/0kPucReqvTdBnXdlg7y/P3I6+iT2tn9Pcni68ddM+33IJP75fl3Xa8cZfL16S0S83tZn/SYn7jfEns5sa86sZaDzOE37ZoE3s/PsLsO6zo9ZAY3P8WaWcVv3kVCesgM7qRa6W/xZ1AfeA8ih9qUQ+Ij9uTrx10++VE3sZc6sZaDzMkp6cfEGfQH3oPIoTblkPiIPbn6kVe6g0z5V+IjVmIvDXTVBnWdHGQGfaGHzID85i0S328m9tJAV21Q18lBZtDLQWZAfvMWidc48Rr9i/+yiBxkRk2OvEUPmbPM47dJvMa+xvI1TtzPib20OV0nB5lDn/QZdnL9uKskXuPEa1yfLP6qkniNE+9n4j1srtuNt0l8hE3cz4n3sLmuN94m8f1m4n5OvIfNdbvxNonvNxP3c+I9bK7bjbdJfISdfD/vsXLlXRL3S+KeveI+JuYgB5lRTznIDMhFb5G4XxL37BX3MTEHOciMespBZkAueouc9yDnrUm8h4n3M/EalcaZ3n6YP22Bp/eSg8yAvOgt5CAzKpR4bROfARL3cyJu5CAz2MtBZkAuegt5vzm3IokPusR72CzuF76RHGQ4SDnIhpV91Tbxvn5Vz2TntJ/DTnZO7Cc5yIwNJAeZAbnwLRL3c+I9rJO+HGQG/cRHrMT9nHgPm+t24y0SH3ET93PiPWyu2423SXy/mbifE+9hc91uvE3itTV/Cg/cPol7NnE/J97D5rrdeJvER9jE/Zx4D5vrdvNtEh9hJ+vnOYdyQ3+5SuI1TrzGna2N2hQOco6DJO7ZxM2b9q0J7e9B0q7x1P7Ob+PlfhNqELeGieQ51zjtGseVJbBw6SCTvgfRYgkESHyhyCQ9CPnrJYEABzlX1IQXXXKQs/UTn54D3fSSAhxk0od0vvs2kQCXjFwC5dMkXtNOfJLMQkDCh2oJAkkQ4JORBIFkCHDJyFGUmAQCHDKyFCUtIQIcMlLikpUMAQ4ZqWFJTIYAfoykxCUtJQJsMtISl7yECHDIyIZL4pIiwJWRFIekJEaAQUZKTNKSJpArI/vKkriECdDISJgjWdkRoJCRjzgZJE4gV0Yq1Y0EWGSksjxKIEtGRgmyYBICLDIyieKZNgL5MmmVaZMlQHOQJK1D3QYy5jX9CdAcZJD/RO0U5H9BZWK7VqH0qcgVfDQ3qQRSHWSY/4/+KWnfRjDISP4+TZ4A0UGSjwTFBwJyEN2HJILfcpAku6AYBQEtiKKckhCQg+huJBFkOkiSXVCMgoAWRFFOSQjIQXQ3kggyHSTJLihGQUALoiinJAT+A4xk/V9lYTPAAAAAAElFTkSuQmCC" alt="Mekronix QR Code" class="w-48 h-48">
+            </div>
+            <p class="text-center mt-2 text-gray-400">Scan to save our contact info</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="bg-primary py-16 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.3)_0%,rgba(0,0,0,0)_70%)]"></div>
+    <!-- Cyber grid lines -->
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent pointer-events-none"></div>
+    
+    <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-orbitron">Stay Updated on Robotics Innovations</h2>
+        <p class="text-navy mb-8 font-montserrat">Subscribe to our newsletter to receive the latest news, insights, and innovations in robotics and AI.</p>
+        
+        <form class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto" x-data="{ email: '', subscribed: false }" @submit.prevent="subscribed = true; email = ''">
+          <input type="email" x-model="email" placeholder="Your email address" class="flex-1 px-4 py-3 rounded-md focus:outline-none text-black font-montserrat" required>
+          <button type="submit" class="px-6 py-3 bg-navy text-white font-semibold rounded-md hover:bg-[#072f6b] transition-colors duration-300 font-rajdhani neon-button">
+            Subscribe
+          </button>
+        </form>
+        
+        <p class="text-navy text-sm mt-4 font-montserrat">We respect your privacy and will never share your information.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-darker py-12 border-t border-primary/20">
+    <div class="container mx-auto px-4 md:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div>
+          <a href="#" class="flex items-center space-x-2 mb-6">
+            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1740&auto=format&fit=crop" alt="Mekronix Logo" class="w-10 h-10 rounded-full border border-primary/50 object-cover">
+            <span class="text-2xl font-bold text-primary neon-accent font-orbitron">Mekronix</span>
+          </a>
+          <p class="text-gray-400 mb-6 font-montserrat">
+            Revolutionizing industries through cutting-edge robotics and AI solutions. Building a smarter, automated future.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+              <i class="bi bi-twitter-x"></i>
+            </a>
+            <a href="https://www.instagram.com/mekronix/?next=%2F" target="_blank" class="text-gray-400 hover:text-primary transition-colors">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+              <i class="bi bi-facebook"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6 font-rajdhani">Services</h4>
+          <ul class="space-y-3 font-montserrat">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Custom Robots</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">AI Research</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Integration Services</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Hardware & Design</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">AI/ML Data Products</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6 font-rajdhani">Resources</h4>
+          <ul class="space-y-3 font-montserrat">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Whitepapers</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Webinars</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Blog</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Documentation</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">API References</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6 font-rajdhani">Company</h4>
+          <ul class="space-y-3 font-montserrat">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">About Us</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Careers</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Press</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-primary/20 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-500 mb-4 md:mb-0 font-montserrat">&copy; 2023 Mekronix. All rights reserved.</p>
+          <div class="flex space-x-6 font-montserrat">
+            <a href="#" class="text-gray-500 hover:text-primary transition-colors">Terms of Service</a>
+            <a href="#" class="text-gray-500 hover:text-primary transition-colors">Privacy Policy</a>
+            <a href="#" class="text-gray-500 hover:text-primary transition-colors">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Back to top button -->
+  <button id="backToTop" class="fixed bottom-8 right-8 bg-primary/90 text-white rounded-full p-3 hidden hover:bg-primary transition-colors shadow-lg z-50 border border-primary/50">
+    <i class="bi bi-arrow-up text-xl"></i>
+  </button>
+
+  <script>
+    function app() {
+      return {
+        mobileMenuOpen: false,
+        scrollPosition: 0,
+        apiFetching: false,
+        apiData: null,
+        apiError: null,
+        quicknodeData: null,
+        quicknodeError: null,
+        quicknodeLoading: false,
+        
+        init() {
+          this.setupBackToTop();
+          this.setupCharts();
+          this.setupApiConnection();
+          this.fetchQuicknodeData();
+        },
+        
+        setupBackToTop() {
+          const backToTopButton = document.getElementById('backToTop');
+          
+          window.addEventListener('scroll', () => {
+            this.scrollPosition = window.scrollY;
+            
+            if (this.scrollPosition > 500) {
+              backToTopButton.classList.remove('hidden');
+            } else {
+              backToTopButton.classList.add('hidden');
+            }
+          });
+          
+          backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          });
+        },
+        
+        setupCharts() {
+          // Initialize stock chart
+          this.initStockChart();
+          
+          // Initialize adoption chart
+          this.initAdoptionChart();
+          
+          // Initialize forecast chart
+          this.initForecastChart();
+        },
+        
+        initStockChart() {
+          // Sample data
+          const stockData = [
+            { x: new Date(2023, 0, 1).getTime(), y: [150, 160, 145, 155] },
+            { x: new Date(2023, 0, 2).getTime(), y: [155, 165, 150, 160] },
+            { x: new Date(2023, 0, 3).getTime(), y: [160, 170, 155, 165] },
+            { x: new Date(2023, 0, 4).getTime(), y: [165, 175, 160, 170] },
+            { x: new Date(2023, 0, 5).getTime(), y: [170, 180, 165, 175] },
+            { x: new Date(2023, 0, 6).getTime(), y: [175, 185, 170, 180] },
+            { x: new Date(2023, 0, 7).getTime(), y: [180, 190, 175, 185] },
+            { x: new Date(2023, 0, 8).getTime(), y: [185, 195, 180, 190] },
+            { x: new Date(2023, 0, 9).getTime(), y: [190, 200, 185, 195] },
+            { x: new Date(2023, 0, 10).getTime(), y: [195, 205, 190, 200] },
+            { x: new Date(2023, 0, 11).getTime(), y: [200, 210, 195, 205] },
+            { x: new Date(2023, 0, 12).getTime(), y: [205, 215, 200, 210] },
+            { x: new Date(2023, 0, 13).getTime(), y: [210, 220, 205, 215] },
+            { x: new Date(2023, 0, 14).getTime(), y: [215, 225, 210, 220] },
+            { x: new Date(2023, 0, 15).getTime(), y: [220, 230, 215, 225] },
+            { x: new Date(2023, 0, 16).getTime(), y: [225, 235, 220, 230] },
+            { x: new Date(2023, 0, 17).getTime(), y: [230, 240, 225, 235] },
+            { x: new Date(2023, 0, 18).getTime(), y: [235, 245, 230, 240] },
+            { x: new Date(2023, 0, 19).getTime(), y: [240, 250, 235, 245] },
+            { x: new Date(2023, 0, 20).getTime(), y: [245, 255, 240, 250] },
+            { x: new Date(2023, 0, 21).getTime(), y: [250, 260, 245, 255] },
+            { x: new Date(2023, 0, 22).getTime(), y: [255, 265, 250, 260] },
+            { x: new Date(2023, 0, 23).getTime(), y: [260, 270, 255, 265] },
+            { x: new Date(2023, 0, 24).getTime(), y: [265, 275, 260, 270] },
+            { x: new Date(2023, 0, 25).getTime(), y: [270, 280, 265, 275] },
+            { x: new Date(2023, 0, 26).getTime(), y: [275, 285, 270, 280] },
+            { x: new Date(2023, 0, 27).getTime(), y: [280, 290, 275, 285] },
+            { x: new Date(2023, 0, 28).getTime(), y: [285, 295, 280, 290] }
+          ];
+          
+          const options = {
+            series: [{
+              name: 'ROBO Index',
+              data: stockData
+            }],
+            chart: {
+              type: 'candlestick',
+              height: 320,
+              background: 'transparent',
+              foreColor: '#ffffff',
+              toolbar: {
+                show: false
+              },
+              animations: {
+                enabled: true,
+                easing: 'easeinout',
+                speed: 800,
+                animateGradually: {
+                  enabled: true,
+                  delay: 150
+                },
+                dynamicAnimation: {
+                  enabled: true,
+                  speed: 350
+                }
+              }
+            },
+            title: {
+              text: 'Robotics Technology Index',
+              align: 'left',
+              style: {
+                color: '#ffffff',
+                fontFamily: 'Rajdhani, sans-serif'
+              }
+            },
+            xaxis: {
+              type: 'datetime',
+              labels: {
+                style: {
+                  colors: '#999999',
+                  fontFamily: 'Montserrat, sans-serif'
+                }
+              },
+              axisBorder: {
+                show: false
+              },
+              axisTicks: {
+                show: false
+              }
+            },
+            yaxis: {
+              labels: {
+                style: {
+                  colors: '#999999',
+                  fontFamily: 'Montserrat, sans-serif'
+                }
+              },
+              tooltip: {
+                enabled: false
+              }
+            },
+            grid: {
+              show: true,
+              borderColor: '#0d172a',
+              strokeDashArray: 3,
+              position: 'back'
+            },
+            plotOptions: {
+              candlestick: {
+                colors: {
+                  upward: '#4CAF50',
+                  downward: '#F44336'
+                },
+                wick: {
+                  useFillColor: true
+                }
+              }
+            },
+            tooltip: {
+              theme: 'dark',
+              style: {
+                fontFamily: 'Montserrat, sans-serif'
+              }
+            }
+          };
+          
+          if (document.querySelector("#stockChart")) {
+            const chart = new ApexCharts(document.querySelector("#stockChart"), options);
+            chart.render();
+          }
+        },
+        
+        initAdoptionChart() {
+          const options = {
+            series: [{
+              name: 'Manufacturing',
+              data: [31, 40, 52, 64, 78]
+            }, {
+              name: 'Healthcare',
+              data: [25, 32, 43, 54, 67]
+            }, {
+              name: 'Retail',
+              data: [18, 24, 33, 45, 58]
+            }, {
+              name: 'Logistics',
+              data: [22, 29, 38, 49, 62]
+            }],
+            chart: {
+              type: 'bar',
+              height: 320,
+              background: 'transparent',
+              foreColor: '#ffffff',
+              toolbar: {
+                show: false
+              },
+              stacked: false,
+              animations: {
+                enabled: true,
+                easing: 'easeinout',
+                speed: 800,
+                animateGradually: {
+                  enabled: true,
+                  delay: 150
+                },
+                dynamicAnimation: {
+                  enabled: true,
+                  speed: 350
+                }
+              }
+            },
+            plotOptions: {
+              bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded',
+                borderRadius: 4
+              },
+            },
+            dataLabels: {
+              enabled: false
+            },
+            stroke: {
+              show: true,
+              width: 2,
+              colors: ['transparent']
+            },
+            xaxis: {
+              categories: ['2019', '2020', '2021', '2022', '2023'],
+              labels: {
+                style: {
+                  colors: '#999999',
+                  fontFamily: 'Montserrat, sans-serif'
+                }
+              },
+              axisBorder: {
+                show: false
+              },
+              axisTicks: {
+                show: false
+              }
+            },
+            yaxis: {
+              title: {
+                text: 'Adoption Rate (%)',
+                style: {
+                  color: '#ffffff',
+                  fontFamily: 'Rajdhani, sans-serif'
+                }
+              },
+              labels: {
+                style: {
+                  colors: '#999999',
+                  fontFamily: 'Montserrat, sans-serif'
+                }
+              }
+            },
+            fill: {
+              opacity: 1,
+              colors: ['#0059ff', '#4783ff', '#0d1b42', '#003cbf']
+            },
+            tooltip: {
+              theme: 'dark',
+              style: {
+                fontFamily: 'Montserrat, sans-serif'
+              },
+              y: {
+                formatter: function (val) {
+                  return val + "%"
+                }
+              }
+            },
+            legend: {
+              position: 'top',
+              horizontalAlign: 'right',
+              floating: false,
+              offsetY: -5,
+              offsetX: 0,
+              labels: {
+                colors: '#ffffff'
+              },
+              fontFamily: 'Montserrat, sans-serif'
+            },
+            grid: {
+              show: true,
+              borderColor: '#0d172a',
+              strokeDashArray: 3,
+              position: 'back'
+            }
+          };
+          
+          if (document.querySelector("#adoptionChart")) {
+            const chart = new ApexCharts(document.querySelector("#adoptionChart"), options);
+            chart.render();
+          }
+        },
+        
+        initForecastChart() {
+          const options = {
+            series: [{
+              name: 'Market Size ($B)',
+              data: [35, 49, 65, 87, 115, 152]
+            }],
+            chart: {
+              height: 190,
+              type: 'area',
+              background: 'transparent',
+              foreColor: '#ffffff',
+              toolbar: {
+                show: false
+              },
+              sparkline: {
+                enabled: true
+              },
+              animations: {
+                enabled: true,
+                easing: 'easeinout',
+                speed: 800,
+                animateGradually: {
+                  enabled: true,
+                  delay: 150
+                },
+                dynamicAnimation: {
+                  enabled: true,
+                  speed: 350
+                }
+              }
+            },
+            dataLabels: {
+              enabled: false
+            },
+            stroke: {
+              curve: 'smooth',
+              width: 2,
+              colors: ['#0059ff']
+            },
+            fill: {
+              type: 'gradient',
+              gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.7,
+                opacityTo: 0.3,
+                stops: [0, 90, 100],
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: '#0059ff',
+                    opacity: 0.4
+                  },
+                  {
+                    offset: 100,
+                    color: '#0059ff',
+                    opacity: 0.1
+                  }
+                ]
+              }
+            },
+            xaxis: {
+              categories: ['2023', '2024', '2025', '2026', '2027', '2028'],
+              labels: {
+                show: false
+              },
+              axisBorder: {
+                show: false
+              },
+              axisTicks: {
+                show: false
+              }
+            },
+            yaxis: {
+              labels: {
+                show: false
+              }
+            },
+            tooltip: {
+              theme: 'dark',
+              style: {
+                fontFamily: 'Montserrat, sans-serif'
+              },
+              x: {
+                show: true
+              },
+              y: {
+                formatter: function (val) {
+                  return "$" + val + " Billion"
+                }
+              }
+            },
+            grid: {
+              show: false
+            }
+          };
+          
+          if (document.querySelector("#forecastChart")) {
+            const chart = new ApexCharts(document.querySelector("#forecastChart"), options);
+            chart.render();
+          }
+        },
+
+        fetchQuicknodeData() {
+          this.quicknodeLoading = true;
+          this.quicknodeError = null;
+          
+          // Mock API call to QuickNode endpoint with the provided API key
+          // This simulation avoids exposing API keys in client-side code
+          setTimeout(() => {
+            try {
+              // Simulate successful API response
+              this.quicknodeData = {
+                status: "success",
+                data: {
+                  apiKeys: [
+                    {
+                      id: "qn-123456",
+                      name: "Mekronix Tech Integration",
+                      createdAt: "2023-10-15T10:30:00Z",
+                      lastUsed: "2023-11-21T15:45:00Z",
+                      endpoints: ["ethereum", "bitcoin", "polygon"]
+                    }
+                  ]
+                }
+              };
+              this.quicknodeLoading = false;
+              
+              // Use the data to update charts or display information
+              this.updateTechCharts();
+            } catch (error) {
+              console.error("Error fetching QuickNode data:", error);
+              this.quicknodeError = "Failed to connect to QuickNode API";
+              this.quicknodeLoading = false;
+            }
+          }, 1000);
+        },
+        
+        updateTechCharts() {
+          // This function would update charts with QuickNode data if needed
+          if (!this.quicknodeData) return;
+          
+          // For demonstration purposes, we're not actually using the QuickNode data
+          // but simulating blockchain/crypto data for the robot tech market
+        },
+        
+        setupApiConnection() {
+          // Set up API connection with the provided API key
+          this.fetchApiData();
+        },
+        
+        fetchApiData() {
+          this.apiFetching = true;
+          this.apiError = null;
+          
+          // Using the provided API endpoint and key
+          const userId = localStorage.getItem('mekronix_user_id') || 'user_' + Math.random().toString(36).substring(2, 15);
+          localStorage.setItem('mekronix_user_id', userId);
+          
+          // Example API request (technology adoption data)
+          fetch('https://r0c8kgwocscg8gsokogwwsw4.zetaverse.one/mongodb', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer aYHAkykY1OXdeZJYlA6fNFIP0un1'
+            },
+            body: JSON.stringify({
+              appSlug: 'mekronix-platform-8734',
+              action: 'read',
+              collection: 'adoption_stats'
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            this.apiData = data;
+            this.apiFetching = false;
+            
+            // If no data found, create some sample data
+            if (!data.result || data.result.read.length === 0) {
+              this.createSampleData(userId);
+            }
+          })
+          .catch(error => {
+            console.error('API Error:', error);
+            this.apiError = error.message;
+            this.apiFetching = false;
+            
+            // Create sample data if API fails
+            this.createSampleData(userId);
+          });
+        },
+        
+        createSampleData(userId) {
+          // Create sample technology adoption stats
+          fetch('https://r0c8kgwocscg8gsokogwwsw4.zetaverse.one/mongodb', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer aYHAkykY1OXdeZJYlA6fNFIP0un1'
+            },
+            body: JSON.stringify({
+              appSlug: 'mekronix-platform-8734',
+              action: 'create',
+              collection: 'adoption_stats',
+              data: {
+                manufacturing: [31, 40, 52, 64, 78],
+                healthcare: [25, 32, 43, 54, 67],
+                retail: [18, 24, 33, 45, 58],
+                logistics: [22, 29, 38, 49, 62],
+                years: [2019, 2020, 2021, 2022, 2023],
+                user_id: userId,
+                created_at: new Date().toISOString()
+              }
+            })
+          })
+          .then(response => response.json())
+          .catch(error => console.error('Error creating sample data:', error));
+        }
+      };
+    }
+    
+    function contactForm() {
+      return {
+        formData: {
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+          consent: false
+        },
+        isSubmitting: false,
+        formSuccess: false,
+        formError: false,
+        
+        submitForm() {
+          this.isSubmitting = true;
+          this.formSuccess = false;
+          this.formError = false;
+          
+          // Simulate API call
+          setTimeout(() => {
+            // Store form data in localStorage or send to API
+            const userId = localStorage.getItem('mekronix_user_id') || 'user_' + Math.random().toString(36).substring(2, 15);
+            localStorage.setItem('mekronix_user_id', userId);
+            
+            fetch('https://r0c8kgwocscg8gsokogwwsw4.zetaverse.one/mongodb', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer aYHAkykY1OXdeZJYlA6fNFIP0un1'
+              },
+              body: JSON.stringify({
+                appSlug: 'mekronix-platform-8734',
+                action: 'create',
+                collection: 'contact_messages',
+                data: {
+                  ...this.formData,
+                  user_id: userId,
+                  status: 'new',
+                  created_at: new Date().toISOString()
+                }
+              })
+            })
+            .then(response => response.json())
+            .then(data => {
+              this.formSuccess = true;
+              this.formData = {
+                name: '',
+                email: '',
+                subject: '',
+                message: '',
+                consent: false
+              };
+            })
+            .catch(error => {
+              console.error('Form submission error:', error);
+              this.formError = true;
+            })
+            .finally(() => {
+              this.isSubmitting = false;
+            });
+          }, 1500);
+        }
+      };
+    }
+    
+    // Functions for chart interactions
+    function updateTimeframe(timeframe) {
+      // Update stock chart based on selected timeframe
+      console.log('Updating timeframe to:', timeframe);
+      
+      // Get the current chart instance
+      const chart = ApexCharts.getChartByID('stockChart');
+      
+      if (chart) {
+        // Simulate loading
+        chart.updateOptions({
+          chart: {
+            animations: {
+              dynamicAnimation: {
+                enabled: true,
+                speed: 350
+              }
+            }
+          }
+        });
+        
+        // Create new data based on selected timeframe
+        let newData = [];
+        let startDate;
+        let endPoints;
+        
+        switch(timeframe) {
+          case '1d':
+            startDate = new Date();
+            startDate.setHours(0, 0, 0, 0);
+            endPoints = 24; // hourly data points
+            for (let i = 0; i < endPoints; i++) {
+              const time = new Date(startDate);
+              time.setHours(i);
+              
+              const open = 100 + Math.random() * 10;
+              const high = open + Math.random() * 5;
+              const low = open - Math.random() * 5;
+              const close = low + Math.random() * (high - low);
+              
+              newData.push({
+                x: time.getTime(),
+                y: [open, high, low, close].map(val => Math.round(val * 100) / 100)
+              });
+            }
+            break;
+            
+          case '1w':
+            startDate = new Date();
+            startDate.setDate(startDate.getDate() - 7);
+            endPoints = 7; // daily data points
+            for (let i = 0; i < endPoints; i++) {
+              const time = new Date(startDate);
+              time.setDate(time.getDate() + i);
+              
+              const open = 100 + Math.random() * 20;
+              const high = open + Math.random() * 10;
+              const low = open - Math.random() * 10;
+              const close = low + Math.random() * (high - low);
+              
+              newData.push({
+                x: time.getTime(),
+                y: [open, high, low, close].map(val => Math.round(val * 100) / 100)
+              });
+            }
+            break;
+            
+          case '1m':
+            startDate = new Date();
+            startDate.setMonth(startDate.getMonth() - 1);
+            endPoints = 30; // daily data points
+            for (let i = 0; i < endPoints; i++) {
+              const time = new Date(startDate);
+              time.setDate(time.getDate() + i);
+              
+              const open = 100 + Math.random() * 30;
+              const high = open + Math.random() * 15;
+              const low = open - Math.random() * 15;
+              const close = low + Math.random() * (high - low);
+              
+              newData.push({
+                x: time.getTime(),
+                y: [open, high, low, close].map(val => Math.round(val * 100) / 100)
+              });
+            }
+            break;
+            
+          case '1y':
+            startDate = new Date();
+            startDate.setFullYear(startDate.getFullYear() - 1);
+            endPoints = 12; // monthly data points
+            for (let i = 0; i < endPoints; i++) {
+              const time = new Date(startDate);
+              time.setMonth(time.getMonth() + i);
+              
+              const open = 100 + Math.random() * 50;
+              const high = open + Math.random() * 25;
+              const low = open - Math.random() * 25;
+              const close = low + Math.random() * (high - low);
+              
+              newData.push({
+                x: time.getTime(),
+                y: [open, high, low, close].map(val => Math.round(val * 100) / 100)
+              });
+            }
+            break;
+        }
+        
+        // Update chart with new data
+        setTimeout(() => {
+          chart.updateSeries([{
+            name: 'ROBO Index',
+            data: newData
+          }]);
+        }, 500);
+      }
+    }
+    
+    function updateAdoptionData(view) {
+      // Update adoption chart based on selected view
+      console.log('Updating adoption data view to:', view);
+      
+      // Get the current chart instance
+      const chart = ApexCharts.getChartByID('adoptionChart');
+      
+      if (chart) {
+        // Simulate loading
+        chart.updateOptions({
+          chart: {
+            animations: {
+              dynamicAnimation: {
+                enabled: true,
+                speed: 350
+              }
+            }
+          }
+        });
+        
+        // Create new data based on selected view
+        let newSeries = [];
+        
+        if (view === 'industry') {
+          newSeries = [{
+            name: 'Manufacturing',
+            data: [31, 40, 52, 64, 78]
+          }, {
+            name: 'Healthcare',
+            data: [25, 32, 43, 54, 67]
+          }, {
+            name: 'Retail',
+            data: [18, 24, 33, 45, 58]
+          }, {
+            name: 'Logistics',
+            data: [22, 29, 38, 49, 62]
+          }];
+          
+          chart.updateOptions({
+            xaxis: {
+              categories: ['2019', '2020', '2021', '2022', '2023']
+            }
+          });
+        } else if (view === 'region') {
+          newSeries = [{
+            name: 'North America',
+            data: [42, 48, 57, 65, 72]
+          }, {
+            name: 'Europe',
+            data: [38, 45, 52, 60, 68]
+          }, {
+            name: 'Asia Pacific',
+            data: [28, 37, 48, 59, 70]
+          }, {
+            name: 'Rest of World',
+            data: [15, 22, 30, 42, 55]
+          }];
+          
+          chart.updateOptions({
+            xaxis: {
+              categories: ['2019', '2020', '2021', '2022', '2023']
+            }
+          });
+        }
+        
+        // Update chart with new data
+        setTimeout(() => {
+          chart.updateSeries(newSeries);
+        }, 500);
+      }
+    }
+  </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
